@@ -3,7 +3,7 @@ import random as r
 board = [["⚪", "⚪", "⚪"], ["⚪", "⚪", "⚪"], ["⚪", "⚪", "⚪"]]
 current_mine = "🟢"
 last_mine = "🔴"
-lastpos = None
+lastpos = []
 currentpos = []
 ship_pos = [r.randint(0, 2), r.randint(0, 2)]
 
@@ -22,7 +22,8 @@ while True:
     
     while y < 0 or y > 3:
         y = int(input("Enter valid y coordinate:"))
-    board[lastpos[0] - 1][lastpos[1] - 1] = "⚪"
+    if not lastpos == []:
+        board[lastpos[0] - 1][lastpos[1] - 1] = "⚪"
     lastpos = currentpos
     currentpos[0], currentpos[1] = x, y
     board[x - 1][y - 1] = current_mine
