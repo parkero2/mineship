@@ -3,8 +3,8 @@ import random as r
 board = [["⚪", "⚪", "⚪"], ["⚪", "⚪", "⚪"], ["⚪", "⚪", "⚪"]]
 current_mine = "🟢"
 last_mine = "🔴"
-lastpos = []
-currentpos = []
+lastpos = [None, None]
+currentpos = [None, None]
 ship_pos = [r.randint(0, 2), r.randint(0, 2)]
 
 def print_board():
@@ -22,7 +22,7 @@ while True:
     
     while y < 0 or y > 3:
         y = int(input("Enter valid y coordinate:"))
-    if not lastpos == []:
+    if not lastpos == [None, None]:
         board[lastpos[0] - 1][lastpos[1] - 1] = "⚪"
     lastpos = currentpos
     currentpos[0], currentpos[1] = x, y
@@ -38,9 +38,11 @@ while True:
             #horizontal movment
             ship_pos[1] += m
         else:
-            ship_pos[0] += m
+            ship_pos[0] -= m
         if ship_pos[0] + 1 == lastpos[0] and ship_pos[1] + 1 == lastpos[1]:
             print("You Win!")
+            break
         else:
             print("You Lose! Seriously, a virtual ship beat you?")
+            break
     print_board()
